@@ -1,1 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rice Disease Detector</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            width: 100%;
+            background: #1a237e;
+            color: #fff;
+            padding: 0rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar-menu {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .navbar-menu li a {
+            color: #fff;
+            text-decoration: none;
+            transition: transform 0.2s ease, color 0.3s ease;
+            display: inline-block;
+        }
+
+        .navbar-menu li a:hover {
+            color: #9fa8da;
+            transform: scale(1.1);
+        }
+
+        .hero {
+            background-image: linear-gradient(135deg, #80cbc4, #26a69a);
+            color: #fff;
+            text-align: center;
+            padding: 5rem 0rem;
+            margin-top: 50px;
+            margin-bottom: -32px;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            background: #00796b;
+            color: #fff;
+            padding: 1rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #004d40;
+            transform: scale(1.1);
+        }
+
+        .container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .container h2 {
+            font-size: 2rem;
+            color: #26a69a;
+            margin-bottom: 1.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 2px solid #26a69a;
+            border-radius: 5px;
+            background-color: #f1f8e9;
+            font-size: 1rem;
+            color: #26a69a;
+            transition: border-color 0.3s ease;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        input[type="file"]:hover {
+            border-color: #00796b;
+        }
+
+        input[type="submit"] {
+            background: #26a69a;
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: #00796b;
+            transform: scale(1.05);
+        }
+
+        img {
+            margin-top: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            max-width: 100%;
+            height: auto;
+        }
+
+        img:hover {
+            transform: scale(1.03);
+        }
+
+        .footer {
+            background: #1a237e;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer p {
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem;
+            }
+
+            .navbar-brand {
+                margin-bottom: 0.5rem;
+            }
+
+            .navbar-menu {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .navbar-menu li {
+                margin: 0.5rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            .container h2 {
+                font-size: 1.75rem;
+            }
+
+            input[type="file"] {
+                font-size: 0.9rem;
+            }
+
+            input[type="submit"] {
+                font-size: 1rem;
+            }
+        }
+
+        .content-section {
+            background: #fff;
+            padding: 0rem 0rem;
+            border-radius: 60px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem auto;
+            display: none;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            color: #26a69a;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            text-align: center;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-brand">Upload and Predict</a>
+            <ul class="navbar-menu">
+                <li><a href="#purpose">Purpose</a></li>
+                <li><a href="#predict">Prediction Area</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <h1>Detect Rice Diseases with Ease</h1>
+        <p>Upload an image of your rice plant and let our advanced AI identify potential diseases. Protect your crops and
+            maximize your yield!</p>
+        <a href="#predict" class="cta-button">Get Started</a>
+    </section>
+
+    <!-- Purpose Section -->
+    <section id="purpose" class="content-section">
+        <h2>Welcome to the Rice Disease Detector</h2>
+        <p>This application helps you identify diseases affecting your rice crops. By simply uploading an image of a
+            diseased leaf, our AI-powered system will analyze the image and provide a diagnosis. Early detection of
+            diseases is crucial for preventing widespread damage and ensuring healthy yields. This tool is designed to be
+            user-friendly and accessible to farmers and agricultural experts alike. We hope this helps in your agricultural
+            endeavors.</p>
+    </section>
+
+    <!-- Predict Section -->
+    <section id="predict" class="container content-section">
+        <h2>Upload and Predict</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" required>
+            <br>
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction %}
+            <h3>Prediction:</h3>
+            <p>
+                <strong>{{ prediction.label }}</strong>: {{ prediction.probability }}%<br>
+                {{ prediction.description }}
+            </p>
+            <img src="{{ file_path }}" width="300">
+        {% endif %}
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="content-section">
+        <h2>About Us</h2>
+        <p>We are a team of agricultural experts and software engineers dedicated to developing innovative solutions for
+            modern farming challenges. Our mission is to empower farmers with the tools they need to improve crop yields
+            and promote sustainable agricultural practices. This Rice Disease Detector is one of our many projects aimed at
+            leveraging technology to address real-world problems in agriculture. We are committed to continuous improvement
+            and welcome feedback from our users to enhance the functionality and accuracy of our application.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="content-section">
+        <h2>Contact Us</h2>
+        <p>Have questions or need assistance? Reach out to us via email at hamadhanif267@gmail.com or call us at
+            +923017379199. We are here to help you with any inquiries regarding our application or rice disease management.
+            You can also fill out a contact form on our website for more detailed support. We value your feedback and look
+            forward to hearing from you!</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Rice Disease Detector. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showSection() {
+            const hash = window.location.hash;
+            const sections = document.querySelectorAll('.content-section');
+
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            if (hash) {
+                const targetSection = document.querySelector(hash);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                } else {
+                    document.querySelector('#purpose').classList.add('active');
+                }
+            } else {
+                document.querySelector('#purpose').classList.add('active');
+            }
+        }
+
+        showSection();
+        window.addEventListener('hashchange', showSection);
+    </script>
+</body>
+
+</html>
