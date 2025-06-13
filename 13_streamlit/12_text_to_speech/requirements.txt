@@ -1,0 +1,4 @@
+# use streamlit_tts environment
+openai==1.86.0
+pydub==0.25.1
+streamlit==1.45.1
