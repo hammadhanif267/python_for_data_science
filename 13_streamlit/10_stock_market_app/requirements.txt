@@ -1,0 +1,12 @@
+# use streamlit_envv environment
+tensorflow==2.17.1
+matplotlib==3.10.3
+numpy==1.26.4
+pandas==2.3.0
+plotly==6.1.2
+prophet==1.1.7
+scikit_learn==1.7.0
+seaborn==0.13.2
+statsmodels==0.14.4
+streamlit==1.45.1
+yfinance==0.2.61
