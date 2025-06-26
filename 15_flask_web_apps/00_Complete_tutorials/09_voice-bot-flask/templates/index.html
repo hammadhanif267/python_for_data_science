@@ -1,1 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voice-Assisted Chatbot 🎙️</title>
+    <!-- Latest Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-papnf9rHxg0t7nqQgZz3E7e2z7S8u9pIDdLgO5MEyzEBl1Od5Gr4Sz+VXJXMKZ7iF1c4+H0JHka4qIQUndz5Pg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-image: url('https://cdn.arstechnica.net/wp-content/uploads/2024/08/robot_audio_output.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
 
+      .top-bar {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 12px 0;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+        width: 100%;
+      }
+
+      p {
+        font-size: 30px;
+        margin-top: 50px;
+        text-align: center;
+      }
+
+      button {
+        padding: 8px 16px;
+        font-size: 14px;
+        cursor: pointer;
+        margin: 10px auto;
+        display: block;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+
+      button:hover {
+        transform: scale(1.1);
+        background-color: #45a049;
+      }
+
+      #chatbox {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 10px;
+        border-radius: 10px;
+        margin: 20px auto;
+        width: fit-content;
+        max-width: 90%;
+      }
+
+      .bottom-nav {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 8px 0;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .bottom-nav a {
+        color: white;
+        margin: 0 15px;
+        font-size: 22px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .bottom-nav a:hover {
+        color: #4CAF50;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">Voice-Assisted Chatbot 🎙️</div>
+
+    <p>Ask a question, I am listening...</p>
+    <button id="start-button">Start Recording</button>
+    <div id="chatbox"></div>
+
+    <div class="bottom-nav">
+      <a href="https://github.com/hammadhanif267" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/hammad-hanif-153a182bb" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://twitter.com/hammadhanif267" target="_blank"><i class="fab fa-twitter"></i></a>
+    </div>
+
+    <script>
+      const startButton = document.getElementById("start-button");
+      const chatbox = document.getElementById("chatbox");
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+
+      recognition.continuous = false;
+      recognition.lang = "en-US";
+
+      startButton.addEventListener("click", () => {
+        recognition.start();
+      });
+
+      recognition.onresult = (event) => {
+        const user_text = event.results[0][0].transcript;
+        chatbox.innerHTML += `<p style="font-size:20px;">🙋: ${user_text}</p>`;
+
+        fetch("/generate_response", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: user_text }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            chatbox.innerHTML += `<p style="font-size:20px;">🤖: ${data.ai_text}</p>`;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Error:", event.error);
+      };
+    </script>
+  </body>
+</html>
