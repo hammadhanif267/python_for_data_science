@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tip Calculator</title>
+    <title>Tip Prediction Result</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome for icons -->
@@ -18,7 +18,7 @@
             justify-content: space-between;
         }
         .top-bar {
-            height: 45px;
+            height: 45px; 
             background-color: #0a0b4c;
             width: 100%;
             display: flex;
@@ -36,22 +36,15 @@
             backdrop-filter: blur(5px);
             margin: 20px auto;
             max-width: 500px;
+            text-align: center;
         }
         h2 {
-            text-align: center;
             margin-bottom: 20px;
             color: #fff;
         }
-        label {
-            color: #fff;
-        }
-        .form-control {
-            background-color: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: #fff;
-        }
-        .form-control::placeholder {
-            color: #ddd;
+        .lead {
+            color: #ffebcd;
+            font-size: 1.5rem;
         }
         .btn-primary {
             background-color: #ff7e5f;
@@ -85,18 +78,9 @@
 </div>
 
 <div class="container mt-5">
-    <h2 class="mb-4">Enter Your Bill Details</h2>
-    <form action="/" method="post">
-        <div class="form-group">
-            <label for="total_bill">Total Bill:</label>
-            <input type="number" class="form-control" id="total_bill" name="total_bill" step="0.01" required>
-        </div>
-        <div class="form-group">
-            <label for="size">Size:</label>
-            <input type="number" class="form-control" id="size" name="size" required>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Calculate Tip</button>
-    </form>
+    <h2>Predicted Tip Amount</h2>
+    <p class="lead">Your predicted tip is: ${{ prediction }}</p>
+    <a href="/" class="btn btn-primary">Calculate again</a>
 </div>
 
 <div class="navbar-bottom">
