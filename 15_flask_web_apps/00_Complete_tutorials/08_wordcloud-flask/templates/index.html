@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Word Cloud Generator</title>
+  <!-- FontAwesome for footer icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('https://c4.wallpaperflare.com/wallpaper/922/818/397/text-typography-religion-word-clouds-wallpaper-preview.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      color: white;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .navbar {
+      background-color: rgba(45, 151, 135, 0.7);
+      padding: 10px 0;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px 30px;
+      border-radius: 15px;
+      width: 450px; /* increased width */
+      margin: 120px auto 50px; /* space from navbar and bottom */
+      text-align: center;
+    }
+    .form-container h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    input[type="file"], select, input[type="submit"] {
+      margin: 10px auto;
+      padding: 12px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: none;
+      width: 50%;
+      display: block;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* smooth zoom */
+    }
+    input[type="submit"]:hover {
+      transform: scale(1.1); /* Zoom effect */
+      box-shadow: 0 0 15px #4CAF50; /* Green glowing shadow */
+    }
+    .footer {
+      background-color: rgba(45, 151, 135, 0.7);
+      padding: 10px 0;
+      text-align: center;
+      margin-top: auto;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+    .footer a {
+      color: white;
+      margin: 0 15px;
+      font-size: 20px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
 
+  <div class="navbar">Word Cloud Generator</div>
+
+  <div class="form-container">
+    <h1>Upload a file to generate a word cloud</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+      <input type="file" name="file" required>
+
+      <label for="format" style="margin-top: 10px;">Choose a format:</label>
+      <select name="format" id="format">
+        <option value="png">PNG</option>
+        <option value="jpg">JPG</option>
+      </select>
+
+      <input type="submit" value="Generate Word Cloud">
+    </form>
+  </div>
+
+  <div class="footer">
+    <a href="https://github.com/hammadhanif267" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://linkedin.com/in/hammad-hanif-153a182bb" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://twitter.com/hammadhanif267" target="_blank"><i class="fab fa-twitter"></i></a>
+  </div>
+
+</body>
+</html>
