@@ -1,1 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Student Marks Prediction</title>
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='pic.jpg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
+        /* Green top bar */
+        h1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #23b83c; 
+            color: white;
+            padding: 0.7rem 0;
+            margin: 0;
+            text-align: center;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .page-content {
+            padding-top: 3.5rem;
+            padding-bottom: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 7.5rem);
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Transparent white for readability */
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        input[type="number"] {
+            width: 90%;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-size: 1rem;
+            border: 2px solid #020353;
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="number"]:hover,
+        input[type="number"]:focus {
+            transform: scale(1.03);
+            box-shadow: 0 0 10px rgba(35, 184, 60, 0.4);
+        }
+
+        .button {
+            background-color: #23b83c;
+            border: 2px solid #020353;
+            color: white;
+            padding: 0.8rem;
+            font-size: 1rem;
+            width: 95%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            background-color: #1d9f32;
+        }
+
+        textarea {
+            margin-top: 1rem;
+            width: 90%;
+            height: 4rem;
+            resize: none;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #999;
+        }
+
+        /* Thin black bottom navbar */
+        .bottombar {
+            width: 100%;
+            background-color: #111;
+            color: #fff;
+            padding: 0.4rem 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .bottombar a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+        }
+
+        .bottombar a:hover {
+            color: #23b83c;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+            input, .button {
+                font-size: 0.95rem;
+            }
+            .bottombar {
+                font-size: 1.2rem;
+                gap: 1rem;
+            }
+            .bottombar a {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Marks Predictor</h1>
+
+    <div class="page-content">
+        <div class="container">
+            <form action="{{ url_for('predict') }}" method="post">
+                <input type="number" name="hours" placeholder="Enter Study Hours (1-20)" min="1" max="20" required>
+                <button type="submit" class="button">Predict Marks</button>
+            </form>
+
+            {% if prediction_text %}
+            <textarea readonly>{{ prediction_text }}</textarea>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="bottombar">
+        <a href="https://github.com/hammadhanif267" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/hammad-hanif-153a182bb" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://x.com/hammadhanif267" target="_blank" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+        </a>
+    </div>
+</body>
+</html>
